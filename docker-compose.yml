@@ -4,7 +4,7 @@ services:
   frontend:
     image: warsawlo/warsawlo-2.0:latest
     ports:
-      - "8000:80"
+      - "80:80"
     networks:
       - warsawlo
     environment:
