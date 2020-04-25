@@ -1,0 +1,55 @@
+version: "3.7"
+services:
+
+  frontend:
+    image: warsawlo/warsawlo-2.0:latest
+    ports:
+      - "8000:80"
+    networks:
+      - warsawlo
+    environment:
+      NGINX_BACK_URL: "backend:8080"
+      NGINX_SERVER_NAME: "localhost 127.0.0.1 lo.lazowik.pl"
+    depends_on:
+      - backend
+
+  backend:
+    image: warsawlo/warsawlo-django:latest
+    volumes:
+      - media:/opt/warsawlo/media
+    networks:
+      - warsawlo
+    environment:
+      DJANGO_SETTINGS_MODULE: warsawlo.settings
+      DJANGO_DEBUG: "False"
+      DJANGO_ALLOWED_HOSTS: "localhost 127.0.0.1 lo.lazowik.pl"
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+      SECURE_COOKIES: "True"
+      SQL_ENGINE: django.db.backends.postgresql
+      SQL_DATABASE: ${DB_NAME}
+      SQL_USER: ${DB_USER}
+      SQL_PASSWORD: ${DB_PASSWORD}
+      SQL_HOST: "db"
+      UWSGI_WORKERS_COUNT: 1
+    env_file:
+      - django-secret-key.env
+    depends_on:
+      - db
+
+  db:
+    image: postgres:12.2
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    networks:
+      - warsawlo
+
+networks:
+  warsawlo:
+
+volumes:
+  db-data:
+  media:
