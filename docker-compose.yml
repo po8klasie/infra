@@ -23,7 +23,6 @@ services:
       DJANGO_SETTINGS_MODULE: warsawlo.settings
       DJANGO_DEBUG: "False"
       DJANGO_ALLOWED_HOSTS: "localhost 127.0.0.1 lo.lazowik.pl"
-      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
       SECURE_COOKIES: "True"
       SQL_ENGINE: django.db.backends.postgresql
       SQL_DATABASE: ${DB_NAME}
