@@ -34,6 +34,21 @@ Components:
 
 ## Detailed setup
 
+### Google Cloud
+* Create an `f1-micro` instance (go to "Compute Engine")
+    * We suggest `europe-west4`: cheaper than Frankfurt, still pretty good latency.
+    * OS image: latest stable of Container Optimized OS (10GB is fine)
+    * Select "Allow HTTP traffic"
+* Log into the instance by clicking the "SSH" button.
+    * Open port 80: `sudo iptables -w -A INPUT -p tcp --dport 80 -j ACCEPT`
+    * `git pull https://github.com/WarsawLO/infra`
+    * `cd infra`
+    * `docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD:$PWD" -w="$PWD" docker/compose:1.25.5 up -d`
+    * To see logs: `docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD:$PWD" -w="$PWD" docker/compose:1.25.5 logs -f`. You can safely Ctrl-C this command, it won't stop any contaienrs.
+    * To update:
+        * `docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD:$PWD" -w="$PWD" docker/compose:1.25.5 pull`
+        * `docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD:$PWD" -w="$PWD" docker/compose:1.25.5 up -d`
+
 ### Cloudflare
 * DNS -> pick a (sub)domain that points to the gcp instance external IP. Proxy status "Proxied"
 * SSL/TLS
