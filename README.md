@@ -31,3 +31,37 @@ Components:
 ### CI
 * Images are automatically built and uploaded to docker hub using GitHub Actions.
 * [WIP] A cron job on the gcp machine pulls new images and recreates containers every `n` minutes.
+
+## Detailed setup
+
+### Cloudflare
+* DNS -> pick a (sub)domain that points to the gcp instance external IP. Proxy status "Proxied"
+* SSL/TLS
+    * Overview tab
+        * Flexible
+    * Edge Certificates tab
+        * Always Use HTTPS -> On
+        * HSTS
+            * Enable -> On
+            * max-age -> 12 months
+            * includeSubDomains -> On
+            * Preload -> On
+            * No-Sniff Header -> On
+        * Minimum TLS Version -> TLS 1.2
+        * Opportunistic Encryption -> Off
+        * TLS 1.3 -> On
+        * Automatic HTTPS Rewrites -> On
+        * Certificate Transparency Monitoring -> On
+* Caching
+    * Cachin Level -> Standard
+    * Browser Cache TTL -> Respect Existing Headers
+    * Always Online -> On
+* Page Rules
+    * `{your domain}/*`
+        * Cache Level -> Cache Everything
+        * Edge Cache TTL -> a month
+* Network
+    * HTTP/3 (with QUIC) -> On
+    * 0-RTT Connection Resumption -> On
+    * WebSockets -> Off
+* Scrape Shield -> Yours to choose
