@@ -9,7 +9,7 @@ services:
       - warsawlo
     environment:
       NGINX_BACK_URL: "backend:8080"
-      NGINX_SERVER_NAME: "localhost 127.0.0.1 lo.lazowik.pl"
+      NGINX_SERVER_NAME: "localhost 127.0.0.1 lo.lazowik.pl test.warsawlo.pl"
     depends_on:
       - backend
 
@@ -22,7 +22,7 @@ services:
     environment:
       DJANGO_SETTINGS_MODULE: warsawlo.settings
       DJANGO_DEBUG: "False"
-      DJANGO_ALLOWED_HOSTS: "localhost 127.0.0.1 lo.lazowik.pl"
+      DJANGO_ALLOWED_HOSTS: "localhost 127.0.0.1 lo.lazowik.pl test.warsawlo.pl"
       SECURE_COOKIES: "True"
       SQL_ENGINE: django.db.backends.postgresql
       SQL_DATABASE: ${DB_NAME}
