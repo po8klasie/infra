@@ -14,4 +14,4 @@ Non goals:
 
 ## Architecture Overview
 
-![Architecture Diagram][WarsawLO Architecture.png]
+![Architecture Diagram](WarsawLO%20Architecture.png)
