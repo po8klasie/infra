@@ -6,11 +6,12 @@ Goals:
 * Minimum cost
 * Minimum maintenance
 * Survive big spikes in traffic
-* Automated deploys, at least to the test instance [WIP]
+* Automated deploys, at least to the test instance
 * Currently stateless, but has to be able to support statefulness (only in db) in the future
 
 Non goals:
 * Automated bootstrapping: initial setup won't happen that often
+* **Automated updates of infra code (they don't happen often)**
 
 ## Architecture Overview
 
@@ -30,7 +31,8 @@ Components:
 
 ### CI
 * Images are automatically built and uploaded to docker hub using GitHub Actions.
-* [WIP] A cron job on the gcp machine pulls new images and recreates containers every `n` minutes.
+* The same action handles pulling and restarting containers on the test deployment +
+  cloudflare cache purge.
 
 ## Detailed setup
 
@@ -48,6 +50,10 @@ Components:
     * To update:
         * `docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD:$PWD" -w="$PWD" docker/compose:1.25.5 pull`
         * `docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD:$PWD" -w="$PWD" docker/compose:1.25.5 up -d`
+* Create a service account, download the json key, set is as `GCE_SA_KEY` secret in github. Add
+  IAM roles: `Compute OS Admin Login` and `Service Account User`.
+* Create an API token with permissions `Zone.Cache Purge`, save as `CLOUDFLARE_TOKEN` secret.
+* The rest of the secrets are self explanatory.
 
 ### Cloudflare
 * DNS -> pick a (sub)domain that points to the gcp instance external IP. Proxy status "Proxied"
