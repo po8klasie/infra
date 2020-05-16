@@ -6,5 +6,5 @@ alias docker-compose="'"'docker run --rm \
     -w="$PWD" \
     docker/compose:1.25.5'"'"
 
-sudo sh -c "docker-compose pull backend"
-sudo sh -c "docker-compose up -d backend"
+docker-compose pull backend
+docker-compose up -d backend
