@@ -1,10 +1,6 @@
 #!/bin/bash
 
-alias docker-compose="'"'docker run --rm \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    -v "$PWD:$PWD" \
-    -w="$PWD" \
-    docker/compose:1.25.5'"'"
+COMPOSE_CMD=(docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD:$PWD" "-w=\"$PWD\"" docker/compose:1.25.5)
 
-docker-compose pull frontend
-docker-compose up -d frontend
+"${COMPOSE_CMD[@]}" pull frontend
+"${COMPOSE_CMD[@]}" up -d frontend
