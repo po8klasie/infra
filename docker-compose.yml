@@ -11,7 +11,8 @@ services:
       NGINX_BACK_URL: "backend:8080"
       NGINX_SERVER_NAME: "localhost 127.0.0.1 lo.lazowik.pl test.warsawlo.pl"
       API_URL: "/api"
-      PUBLIC_SENTRY_DSN: ""
+    env_file:
+      - public-sentry-dsn.env
     depends_on:
       - backend
 
