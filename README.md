@@ -45,6 +45,7 @@ Components:
     * Open port 80: `sudo iptables -w -A INPUT -p tcp --dport 80 -j ACCEPT`
     * `git pull https://github.com/WarsawLO/infra`
     * `cd infra`
+    * Create `django-secret-key.env` and `public-sentry-dsn.env` files, with `DJANGO_SECRET_KEY="<key>"` and `PUBLIC_SENTRY_DSN="<dsn>"` as content, respectively.
     * `docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD:$PWD" -w="$PWD" docker/compose:1.25.5 up -d`
     * To see logs: `docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD:$PWD" -w="$PWD" docker/compose:1.25.5 logs -f`. You can safely Ctrl-C this command, it won't stop any contaienrs.
     * To update:
