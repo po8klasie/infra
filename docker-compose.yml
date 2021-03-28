@@ -35,6 +35,7 @@ services:
       UWSGI_WORKERS_COUNT: 1
     env_file:
       - django-secret-key.env
+      - backend-sentty-dsn.env
     depends_on:
       - db
 
