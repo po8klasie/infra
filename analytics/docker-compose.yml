@@ -14,8 +14,6 @@ services:
   app:
     image: matomo:4.2.1-fpm
     restart: always
-    links:
-      - db
     volumes:
 #      - ./config:/var/www/html/config:rw
 #      - ./logs:/var/www/html/logs
