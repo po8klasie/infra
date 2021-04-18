@@ -12,7 +12,7 @@ services:
       NGINX_SERVER_NAME: "localhost 127.0.0.1 lo.lazowik.pl test.warsawlo.pl"
       API_URL: "/api"
     env_file:
-      - public-sentry-dsn.env
+      - secrets.env
     depends_on:
       - backend
 
@@ -34,8 +34,7 @@ services:
       SQL_HOST: "db"
       UWSGI_WORKERS_COUNT: 1
     env_file:
-      - django-secret-key.env
-      - backend-sentry-dsn.env
+      - secrets.env
     depends_on:
       - db
 
