@@ -11,7 +11,7 @@ env:
   GCE_INSTANCE_ZONE: europe-west4-a
 
 jobs:
-  build-push-deploy:
+  update-test:
     timeout-minutes: 30
     runs-on: ubuntu-latest
 
@@ -32,9 +32,9 @@ jobs:
     - name: Print secrets
       run: |
         echo "
-        DJANGO_SECRET_KEY='${DJANGO_SECRET_KEY}'
-        PUBLIC_SENTRY_DSN='${PUBLIC_SENTRY_DSN}'
-        SENTRY_DSN='${SENTRY_DSN}'
+        DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+        PUBLIC_SENTRY_DSN=${PUBLIC_SENTRY_DSN}
+        SENTRY_DSN=${SENTRY_DSN}
         " > secrets.env
       shell: bash
       env:
