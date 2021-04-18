@@ -35,12 +35,16 @@ jobs:
         DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
         PUBLIC_SENTRY_DSN=${PUBLIC_SENTRY_DSN}
         SENTRY_DSN=${SENTRY_DSN}
+        MATOMO_BASE_URL=${MATOMO_BASE_URL}
+        MATOMO_SITE_ID=${MATOMO_SITE_ID}
         " > secrets.env
       shell: bash
       env:
         DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
         PUBLIC_SENTRY_DSN: ${{ secrets.PUBLIC_SENTRY_DSN }}
         SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+        MATOMO_BASE_URL: ${{ secrets.MATOMO_BASE_URL }}
+        MATOMO_SITE_ID: ${{ secrets.MATOMO_SITE_ID_TEST }}
         
     - name: Clean ssh keys
       run: |-
