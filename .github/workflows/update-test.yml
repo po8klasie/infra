@@ -44,7 +44,7 @@ jobs:
 
     - name: Upload secrets
       run: |-
-        gcloud compute scp --zone ${GCE_INSTANCE_ZONE} ${GCE_INSTANCE} secrets.env /home/mlazowik/infra/app/
+        gcloud compute scp --zone ${GCE_INSTANCE_ZONE} secrets.env ${GCE_INSTANCE}:/home/mlazowik/infra/app/
 
     - name: Deploy
       run: |-
