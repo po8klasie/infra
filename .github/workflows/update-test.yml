@@ -41,6 +41,14 @@ jobs:
         DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
         PUBLIC_SENTRY_DSN: ${{ secrets.PUBLIC_SENTRY_DSN }}
         SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+        
+    - name: Clean ssh keys
+      run: |-
+        # https://github.com/kyma-project/test-infra/issues/93#issuecomment-457263589
+        for i in $(gcloud compute os-login ssh-keys list | grep -v FINGERPRINT); do \
+            echo "Removing ssh key"; \
+            gcloud compute os-login ssh-keys remove --key $i || true; \
+        done
 
     - name: Upload secrets
       run: |-
