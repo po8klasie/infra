@@ -13,7 +13,6 @@ services:
       API_URL: "/api"
     env_file:
       - secrets.env
-      - frontend.env
     depends_on:
       - backend
 
@@ -36,7 +35,6 @@ services:
       UWSGI_WORKERS_COUNT: 1
     env_file:
       - secrets.env
-      - backend.env
     depends_on:
       - db
 
