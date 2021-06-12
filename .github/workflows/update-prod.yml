@@ -61,7 +61,7 @@ jobs:
     - name: Deploy
       run: |-
         gcloud compute ssh --zone ${GCE_INSTANCE_ZONE} ${GCE_INSTANCE} -- \
-          -tt -C "cd /home/mlazowik_gmail_com/infra/app && git pull && ln -s .env.prod .env && bash update-all.sh && yes | docker system prune"
+          -tt -C "cd /home/mlazowik_gmail_com/infra/app && git pull && ln -sf .env.prod .env && bash update-all.sh && yes | docker system prune"
 
     - name: Purge cache
       uses: jakejarvis/cloudflare-purge-action@v0.3.0
