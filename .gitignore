@@ -32,3 +32,4 @@ override.tf.json
 
 django-secret-key.env
 .idea/
+app/.env
