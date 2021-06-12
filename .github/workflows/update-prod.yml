@@ -1,4 +1,4 @@
-name: Update test
+name: Update prod
 
 on:
   push:
