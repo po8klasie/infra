@@ -10,8 +10,7 @@ services:
     environment:
       NGINX_BACK_URL: "backend:8080"
       NGINX_SERVER_NAME: "localhost 127.0.0.1 test.warsawlo.pl v2.warsawlo.pl"
-      API_URL: "/api"
-      GRAPHQL_ENDPOINT: "/api/graphql/"
+      GRAPHQL_ENDPOINT: "/api/search/graphql/"
     env_file:
       - secrets.env
     depends_on:
