@@ -9,7 +9,7 @@ services:
       - warsawlo
     environment:
       NGINX_BACK_URL: "backend:8080"
-      NGINX_SERVER_NAME: "localhost 127.0.0.1 test.po8klasie.pl po8klasie.pl"
+      NGINX_SERVER_NAME: "localhost 127.0.0.1 test.po8klasie.pl prod.po8klasie.pl"
       API_URL: "/api"
       GRAPHQL_ENDPOINT: "/api/graphql/"
     env_file:
@@ -26,7 +26,7 @@ services:
     environment:
       DJANGO_SETTINGS_MODULE: warsawlo.settings
       DJANGO_DEBUG: "False"
-      DJANGO_ALLOWED_HOSTS: "localhost 127.0.0.1 test.po8klasie.pl po8klasie.pl"
+      DJANGO_ALLOWED_HOSTS: "localhost 127.0.0.1 test.po8klasie.pl prod.po8klasie.pl"
       SECURE_COOKIES: "True"
       SQL_ENGINE: django.db.backends.postgresql
       SQL_DATABASE: warsawlo
