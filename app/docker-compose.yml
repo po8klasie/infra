@@ -10,6 +10,7 @@ services:
     environment:
       NGINX_BACK_URL: "backend:8080"
       NGINX_SERVER_NAME: "localhost 127.0.0.1 test.po8klasie.pl prod.po8klasie.pl"
+      API_URL: "/api"
       GRAPHQL_ENDPOINT: "/api/graphql/"
     env_file:
       - secrets.env
