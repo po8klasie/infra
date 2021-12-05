@@ -2,7 +2,7 @@ version: "3.7"
 services:
 
   frontend:
-    image: warsawlo/warsawlo-2.0:${FRONTEND_TAG}
+    image: ghcr.io/po8klasie/po8klasie:${FRONTEND_TAG}
     ports:
       - "80:80"
     networks:
@@ -18,7 +18,7 @@ services:
       - backend
 
   backend:
-    image: warsawlo/warsawlo-django:${BACKEND_TAG}
+    image: ghcr.io/po8klasie/po8klasie-api:${BACKEND_TAG}
     volumes:
       - media:/opt/warsawlo/media
     networks:
