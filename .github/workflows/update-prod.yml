@@ -1,6 +1,7 @@
 name: Update prod
 
 on:
+  workflow_dispatch:
   push:
     branches:
     - master
