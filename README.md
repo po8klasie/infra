@@ -1,6 +1,6 @@
-# WarsawLO Infra
+# po8klasie Infra
 
-Infra for WarsawLO.
+Infra for po8klasie.
 
 Goals:
 * Minimum cost
@@ -15,19 +15,19 @@ Non goals:
 
 ## Architecture Overview
 
-![Architecture Diagram](WarsawLO%20Architecture.png)
+![Architecture Diagram](po8klasie%20Architecture.png)
 
 Life of a request:
 1. If it's in Cloudflare cache it gets server from there.
 2. If not, it is passed (via HTTP, in our setup Cloudflare strips SSL) to the gcp instance external IP port 80.
 3. Inside the instance it's routed to the nginx container.
-4. If the path is not `/django/*` it gets served directly from the nginx container.
+4. If the path is not `/api/*` it gets served directly from the nginx container.
 5. Otherwise nginx converts the request to the uWSGI protocol and passes it to the uWSGI container.
 6. The result is served to the client and saved in Cloudflare cache.
 
 Components:
-* Nginx image: [warsawlo/warsawlo-2.0](https://hub.docker.com/r/warsawlo/warsawlo-2.0), built from https://github.com/warsawLO/warsawlo-2.0
-* uWSGI image: [warsawlo/warsawlo-django](https://hub.docker.com/r/warsawlo/warsawlo-django), build from https://github.com/WarsawLO/warsawlo-django
+* Nginx image: [ghcr.io/po8klasie/po8klasie](https://github.com/po8klasie/po8klasie/pkgs/container/po8klasie), built from https://github.com/po8klasie/po8klasie
+* uWSGI image: [ghcr.io/po8klasie/po8klasie-api](https://github.com/po8klasie/po8klasie/pkgs/container/po8klasie-api), build from https://github.com/po8klasie/po8klasie-api
 
 ### CI
 * Images are automatically built and uploaded to docker hub using GitHub Actions.
@@ -43,7 +43,7 @@ Components:
     * Select "Allow HTTP traffic"
 * Log into the instance by clicking the "SSH" button.
     * Open port 80: `sudo iptables -w -A INPUT -p tcp --dport 80 -j ACCEPT`
-    * `git pull https://github.com/WarsawLO/infra`
+    * `git pull https://github.com/po8klasie/infra`
     * `cd infra`
     * Create `django-secret-key.env` and `public-sentry-dsn.env` files, with `DJANGO_SECRET_KEY="<key>"` and `PUBLIC_SENTRY_DSN="<dsn>"` as content, respectively.
     * `docker run -it --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$PWD:$PWD" -w="$PWD" docker/compose:1.25.5 up -d`

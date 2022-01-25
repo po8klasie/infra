@@ -19,6 +19,8 @@ services:
     environment:
       API_URL: "/api"
       GRAPHQL_ENDPOINT: "/api/graphql/"
+      APP_ENVIRONMENT: ${APP_ENVIRONMENT}
+      APP_FRONTEND_RELEASE: ${FRONTEND_TAG}
     env_file:
       - secrets.env
     depends_on:
@@ -41,6 +43,7 @@ services:
       SQL_PASSWORD: warsawlo
       SQL_HOST: "db"
       UWSGI_WORKERS_COUNT: 1
+      APP_BACKEND_RELEASE: ${BACKEND_TAG}
     env_file:
       - secrets.env
     depends_on:
