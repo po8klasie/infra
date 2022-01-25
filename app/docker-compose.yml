@@ -1,15 +1,22 @@
 version: "3.7"
 services:
 
-  frontend:
-    image: ghcr.io/po8klasie/po8klasie:${FRONTEND_TAG}
+  nginx:
+    image: nginx:1.20.1
+    restart: always
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx-app.conf/etc/nginx/conf.d/app.conf:ro
     ports:
       - "80:80"
     networks:
-      - warsawlo
+      - po8klasie
+
+  frontend:
+    image: ghcr.io/po8klasie/po8klasie:${FRONTEND_TAG}
+    networks:
+      - po8klasie
     environment:
-      NGINX_BACK_URL: "backend:8080"
-      NGINX_SERVER_NAME: "localhost 127.0.0.1 test.po8klasie.pl po8klasie.pl"
       API_URL: "/api"
       GRAPHQL_ENDPOINT: "/api/graphql/"
     env_file:
@@ -22,7 +29,7 @@ services:
     volumes:
       - media:/opt/warsawlo/media
     networks:
-      - warsawlo
+      - po8klasie
     environment:
       DJANGO_SETTINGS_MODULE: warsawlo.settings
       DJANGO_DEBUG: "False"
@@ -48,10 +55,10 @@ services:
       POSTGRES_PASSWORD: warsawlo
       POSTGRES_DB: warsawlo
     networks:
-      - warsawlo
+      - po8klasie
 
 networks:
-  warsawlo:
+  po8klasie:
 
 volumes:
   db-data:
