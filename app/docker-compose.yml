@@ -17,10 +17,10 @@ services:
     networks:
       - po8klasie
     environment:
-      API_URL: "/api"
-      GRAPHQL_ENDPOINT: "/api/graphql/"
-      APP_ENVIRONMENT: ${APP_ENVIRONMENT}
-      APP_FRONTEND_RELEASE: ${FRONTEND_TAG}
+      NEXT_PUBLIC_API_URL: "/api"
+      NEXT_PUBLIC_GRAPHQL_ENDPOINT: "/api/graphql/"
+      NEXT_PUBLIC_APP_ENVIRONMENT: ${APP_ENVIRONMENT}
+      NEXT_PUBLIC_APP_FRONTEND_RELEASE: ${FRONTEND_TAG}
     env_file:
       - secrets.env
     depends_on:

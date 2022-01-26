@@ -32,12 +32,12 @@ jobs:
         
     - name: Print secrets
       run: |
-        echo "
-        DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
-        PUBLIC_SENTRY_DSN=${PUBLIC_SENTRY_DSN}
+        echo "  
+        NEXT_PUBLIC_PUBLIC_SENTRY_DSN=${PUBLIC_SENTRY_DSN}
+        NEXT_PUBLIC_MATOMO_BASE_URL=${MATOMO_BASE_URL}
+        NEXT_PUBLIC_MATOMO_SITE_ID=${MATOMO_SITE_ID}
         SENTRY_DSN=${SENTRY_DSN}
-        MATOMO_BASE_URL=${MATOMO_BASE_URL}
-        MATOMO_SITE_ID=${MATOMO_SITE_ID}
+        DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
         " > secrets.env
       shell: bash
       env:
